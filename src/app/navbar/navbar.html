@@ -1,0 +1,48 @@
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-cloud-bolt"></i>
+        </div>
+
+        <div class="logo-text">
+            Stormeyt
+        </div>
+
+    </div>
+
+    <div class="search-container">
+
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+        <input
+            type="text"
+            placeholder="Search city..."
+            [(ngModel)]="city"
+            (keyup.enter)="searchCity()"
+        >
+
+    </div>
+
+    <div class="actions">
+
+        <button
+            class="glass-btn"
+            title="Current Location"
+            (click)="getCurrentLocation()">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+
+        </button>
+
+<button
+    class="glass-btn"
+    (click)="toggleTheme()">
+
+    <i class="fa-solid fa-circle-half-stroke"></i>
+
+</button>
+    </div>
+
+</nav>

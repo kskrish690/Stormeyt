@@ -1,0 +1,339 @@
+<div class="weather-container">
+
+    <div class="hero-card">
+
+        <div class="weather-top">
+
+            <div class="weather-info">
+
+                <p class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    {{ weather?.name }}, {{ weather?.sys?.country }}
+                </p>
+
+                <h1>{{ weather?.main?.temp | number:'1.0-0' }}°C</h1>
+
+                <p class="description">
+                    {{ weather?.weather[0]?.description | titlecase }}
+                </p>
+
+                <div class="min-max">
+
+                    <span>
+                        <i class="fa-solid fa-arrow-up"></i>
+                        {{ weather?.main?.temp_max | number:'1.0-0' }}°
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                        {{ weather?.main?.temp_min | number:'1.0-0' }}°
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="weather-icon">
+
+                <img
+                    [src]="'https://openweathermap.org/img/wn/' + weather?.weather[0]?.icon + '@4x.png'"
+                    [alt]="weather?.weather[0]?.description"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="weather-bottom">
+
+            <div class="detail">
+
+                <i class="fa-solid fa-temperature-half"></i>
+
+                <div>
+
+                    <span>Feels Like</span>
+
+                    <h3>{{ weather?.main?.feels_like | number:'1.0-0' }}°C</h3>
+
+                </div>
+
+            </div>
+
+            <div class="detail">
+
+                <i class="fa-solid fa-droplet"></i>
+
+                <div>
+
+                    <span>Humidity</span>
+
+                    <h3>{{ weather?.main?.humidity }}%</h3>
+
+                </div>
+
+            </div>
+
+            <div class="detail">
+
+                <i class="fa-solid fa-wind"></i>
+
+                <div>
+
+                    <span>Wind</span>
+
+                    <h3>{{ weather?.wind?.speed }} m/s</h3>
+
+                </div>
+
+            </div>
+
+            <div class="detail">
+
+                <i class="fa-solid fa-gauge-high"></i>
+
+                <div>
+
+                    <span>Pressure</span>
+
+                    <h3>{{ weather?.main?.pressure }} hPa</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<div class="highlights">
+
+    <div class="highlight-card">
+        <i class="fa-solid fa-droplet"></i>
+        <span>Humidity</span>
+        <h3>{{ weather?.main?.humidity }}%</h3>
+    </div>
+
+    <div class="highlight-card">
+        <i class="fa-solid fa-wind"></i>
+        <span>Wind</span>
+        <h3>{{ weather?.wind?.speed }} m/s</h3>
+    </div>
+
+    <div class="highlight-card">
+        <i class="fa-solid fa-eye"></i>
+        <span>Visibility</span>
+        <h3>{{ (weather?.visibility / 1000) | number:'1.0-1' }} km</h3>
+    </div>
+
+    <div class="highlight-card">
+        <i class="fa-solid fa-gauge-high"></i>
+        <span>Pressure</span>
+        <h3>{{ weather?.main?.pressure }} hPa</h3>
+    </div>
+
+
+</div>
+
+
+<section class="hourly-section">
+
+    <div class="section-header">
+        <h2>Hourly Forecast</h2>
+    </div>
+
+    <div class="hourly-scroll">
+
+        <div
+            class="hour-card"
+            *ngFor="let item of forecastList | slice:0:8">
+
+            <p class="hour-time">
+                {{ item.dt * 1000 | date:'shortTime' }}
+            </p>
+
+            <img
+                [src]="'https://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'"
+                [alt]="item.weather[0].description">
+
+            <h3>
+                {{ item.main.temp | number:'1.0-0' }}°
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="forecast-section">
+
+    <div class="section-header">
+
+        <h2>5-Day Forecast</h2>
+
+    </div>
+
+    <div class="forecast-grid">
+
+        <div
+            class="forecast-card"
+            *ngFor="let day of dailyForecast">
+
+            <p class="day">
+
+                {{ day.dt * 1000 | date:'EEEE' }}
+
+            </p>
+
+            <img
+                [src]="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png'"
+                [alt]="day.weather[0].description">
+
+            <h3>
+
+                {{ day.main.temp | number:'1.0-0' }}°
+
+            </h3>
+
+            <span>
+
+                {{ day.weather[0].main }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="aqi-section" *ngIf="airQuality">
+
+    <div class="section-header">
+        <h2>🌿 Air Quality</h2>
+    </div>
+
+    <div class="aqi-card">
+
+        <div class="aqi-top">
+
+            <div class="aqi-left">
+
+                <i class="fa-solid fa-wind"></i>
+
+                <div>
+                    <span>Air Quality</span>
+                    <h1>{{ airQualityLabel }}</h1>
+                </div>
+
+            </div>
+
+            <div class="aqi-score">
+
+                <small>AQI</small>
+
+                <h1>{{ airQuality.list[0].main.aqi }}</h1>
+
+            </div>
+
+        </div>
+
+        <div class="aqi-grid">
+
+            <div class="aqi-box">
+                <span>PM2.5</span>
+                <h3>{{ airQuality.list[0].components.pm2_5 | number:'1.0-1' }}</h3>
+            </div>
+
+            <div class="aqi-box">
+                <span>PM10</span>
+                <h3>{{ airQuality.list[0].components.pm10 | number:'1.0-1' }}</h3>
+            </div>
+
+            <div class="aqi-box">
+                <span>NO₂</span>
+                <h3>{{ airQuality.list[0].components.no2 | number:'1.0-1' }}</h3>
+            </div>
+
+            <div class="aqi-box">
+                <span>O₃</span>
+                <h3>{{ airQuality.list[0].components.o3 | number:'1.0-1' }}</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<section class="sun-section" *ngIf="weather">
+
+    <div class="section-header">
+        <h2>🌅 Sunrise & Sunset</h2>
+    </div>
+
+    <div class="sun-card">
+
+        <div class="sun-times">
+
+            <div class="sun-box">
+
+                <i class="fa-solid fa-sun"></i>
+
+                <div>
+                    <span>Sunrise</span>
+                    <h3>{{ weather.sys.sunrise * 1000 | date:'shortTime' }}</h3>
+                </div>
+
+            </div>
+
+            <div class="sun-box">
+
+                <i class="fa-solid fa-moon"></i>
+
+                <div>
+                    <span>Sunset</span>
+                    <h3>{{ weather.sys.sunset * 1000 | date:'shortTime' }}</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="progress-wrapper">
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    [style.width.%]="dayProgress">
+
+                    <i class="fa-solid fa-sun sun-icon"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="progress-info">
+
+            <span>Daylight</span>
+
+            <span>{{ daylightHours }}</span>
+
+        </div>
+
+    </div>
+
+</section>
+</div>

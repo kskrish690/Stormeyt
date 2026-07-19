@@ -1,0 +1,581 @@
+.loading-screen{
+
+height:100vh;
+width:100%;
+
+display:flex;
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+
+background:
+radial-gradient(circle at center,#102a56,#020617 70%);
+
+
+color:white;
+
+overflow:hidden;
+
+position:relative;
+
+font-family:Inter,Arial;
+
+
+}
+
+
+
+/* GRID */
+
+
+.background-grid{
+
+position:absolute;
+
+inset:0;
+
+
+background-image:
+
+linear-gradient(
+rgba(56,189,248,.08) 1px,
+transparent 1px),
+
+linear-gradient(
+90deg,
+rgba(56,189,248,.08) 1px,
+transparent 1px);
+
+
+background-size:50px 50px;
+
+
+animation:gridMove 8s linear infinite;
+
+
+}
+
+
+
+@keyframes gridMove{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(50px);
+}
+
+}
+
+
+
+
+
+/* ORB */
+
+
+.orb-container{
+
+position:relative;
+
+width:260px;
+height:260px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+
+}
+
+
+
+
+
+.weather-orb{
+
+width:140px;
+height:140px;
+
+
+border-radius:50%;
+
+
+background:
+
+linear-gradient(
+135deg,
+#38bdf8,
+#2563eb
+);
+
+
+box-shadow:
+
+0 0 40px #38bdf8,
+0 0 100px #2563eb;
+
+
+overflow:hidden;
+
+
+position:relative;
+
+
+animation:float 4s infinite ease-in-out;
+
+
+}
+
+
+
+@keyframes float{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+
+
+
+.planet{
+
+position:absolute;
+
+inset:0;
+
+
+background:
+
+radial-gradient(
+circle at 30% 30%,
+white,
+transparent 20%);
+
+
+opacity:.3;
+
+
+animation:rotate 6s linear infinite;
+
+
+}
+
+
+
+@keyframes rotate{
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+
+
+
+
+/* CLOUDS */
+
+
+.cloud{
+
+position:absolute;
+
+background:white;
+
+height:25px;
+
+width:70px;
+
+border-radius:30px;
+
+opacity:.9;
+
+
+}
+
+
+
+.cloud1{
+
+top:55px;
+left:20px;
+
+}
+
+
+
+.cloud2{
+
+top:80px;
+right:10px;
+
+transform:scale(.7);
+
+}
+
+
+
+
+
+/* SCAN RINGS */
+
+
+.scan-ring{
+
+position:absolute;
+
+border-radius:50%;
+
+border:1px solid rgba(56,189,248,.5);
+
+
+}
+
+
+
+.ring1{
+
+width:180px;
+height:180px;
+
+animation:pulse 3s infinite;
+
+}
+
+
+
+.ring2{
+
+width:220px;
+height:220px;
+
+animation:pulse 3s infinite .5s;
+
+}
+
+
+
+.ring3{
+
+width:260px;
+height:260px;
+
+animation:pulse 3s infinite 1s;
+
+}
+
+
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(.8);
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:scale(1.3);
+
+opacity:0;
+
+}
+
+}
+
+
+
+
+/* LOGO */
+
+
+.logo{
+
+font-size:55px;
+
+font-weight:900;
+
+letter-spacing:8px;
+
+
+margin-top:25px;
+
+
+background:
+linear-gradient(90deg,#fff,#38bdf8);
+
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+
+}
+
+
+
+.tagline{
+
+letter-spacing:5px;
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+
+
+
+
+.status{
+
+margin-top:25px;
+
+
+padding:12px 25px;
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+
+border-radius:50px;
+
+
+backdrop-filter:blur(20px);
+
+
+}
+
+
+
+.dot{
+
+display:inline-block;
+
+height:8px;
+
+width:8px;
+
+
+background:#22c55e;
+
+
+border-radius:50%;
+
+
+margin-right:10px;
+
+
+box-shadow:0 0 15px #22c55e;
+
+
+}
+
+
+
+
+/* PROGRESS */
+
+
+.progress{
+
+
+width:300px;
+
+height:5px;
+
+background:#1e293b;
+
+
+margin-top:30px;
+
+border-radius:20px;
+
+overflow:hidden;
+
+
+}
+
+
+
+.progress div{
+
+
+height:100%;
+
+width:40%;
+
+
+background:
+
+linear-gradient(
+90deg,
+#38bdf8,
+#2563eb);
+
+
+animation:load 2s infinite;
+
+
+}
+
+
+
+@keyframes load{
+
+from{
+transform:translateX(-150%);
+}
+
+
+to{
+transform:translateX(300%);
+}
+
+
+}
+:host{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+z-index:999999;
+
+display:block;
+
+opacity:1;
+
+transition:opacity .8s ease, transform .8s ease;
+
+}
+
+
+:host.hide{
+
+opacity:0;
+
+transform:scale(1.08);
+
+pointer-events:none;
+
+}
+
+
+
+
+
+
+/* ===========================
+        SKY
+=========================== */
+
+.sky{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:2;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+        DEVELOPER
+=========================== */
+
+.developer{
+
+    position:absolute;
+
+    bottom:35px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:4px;
+
+    z-index:20;
+
+}
+
+/* DEVELOPED BY */
+
+.developer-title{
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    color:#94a3b8;
+
+    text-transform:uppercase;
+
+}
+
+/* Name */
+
+.developer-name{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+    color:white;
+
+    text-transform:uppercase;
+
+    text-shadow:
+
+    0 0 10px rgba(56,189,248,.4);
+
+}
+
+
+
