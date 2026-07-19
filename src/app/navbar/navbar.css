@@ -1,7 +1,5 @@
 :host{
-
     display:block;
-
 }
 
 /* ===========================
@@ -14,7 +12,6 @@
     height:80px;
 
     margin:22px auto;
-
     padding:0 28px;
 
     display:flex;
@@ -36,13 +33,9 @@
 
     box-shadow:var(--shadow);
 
-    overflow:hidden;
-
     transition:.35s;
 
 }
-
-/* Animated Top Border */
 
 .navbar::before{
 
@@ -77,9 +70,7 @@
 .logo{
 
     display:flex;
-
     align-items:center;
-
     gap:14px;
 
     cursor:pointer;
@@ -91,15 +82,12 @@
 .logo-icon{
 
     width:52px;
-
     height:52px;
 
     border-radius:50%;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:20px;
@@ -121,12 +109,8 @@
 .logo-text{
 
     font-size:1.7rem;
-
     font-weight:700;
-
     color:var(--text);
-
-    letter-spacing:.5px;
 
 }
 
@@ -141,9 +125,7 @@
     height:54px;
 
     display:flex;
-
     align-items:center;
-
     gap:15px;
 
     padding:0 20px;
@@ -156,7 +138,7 @@
 
     backdrop-filter:var(--glass);
 
-    -webkit-backdrop-filter:var(--glass);
+    position:relative;
 
     transition:.3s;
 
@@ -187,10 +169,9 @@
     flex:1;
 
     border:none;
-
     outline:none;
 
-    background:none;
+    background:transparent;
 
     color:var(--text);
 
@@ -205,13 +186,117 @@
 }
 
 /* ===========================
+      SEARCH SUGGESTIONS
+=========================== */
+
+.suggestions{
+
+    position:absolute;
+
+    top:65px;
+    left:0;
+
+    width:100%;
+
+    background:rgba(20,25,40,.95);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+
+    max-height:320px;
+
+    overflow-y:auto;
+
+    z-index:9999;
+
+    animation:dropdown .25s ease;
+
+}
+
+.suggestions::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.suggestions::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+}
+
+.suggestion{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 18px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.suggestion:hover{
+
+    background:rgba(56,189,248,.12);
+
+}
+
+.suggestion.active{
+
+    background:rgba(56,189,248,.20);
+
+}
+
+.city-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.city-name i{
+
+    color:var(--primary);
+
+}
+
+.country{
+
+    color:#b7c2d4;
+
+    font-size:13px;
+
+}
+
+/* ===========================
             BUTTONS
 =========================== */
 
 .actions{
 
     display:flex;
-
     gap:14px;
 
 }
@@ -219,7 +304,6 @@
 .glass-btn{
 
     width:50px;
-
     height:50px;
 
     border-radius:50%;
@@ -228,15 +312,9 @@
 
     background:var(--card);
 
-    backdrop-filter:var(--glass);
-
-    -webkit-backdrop-filter:var(--glass);
-
     color:var(--text);
 
     cursor:pointer;
-
-    font-size:17px;
 
     transition:.3s;
 
@@ -260,37 +338,39 @@
 
 @keyframes float{
 
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-4px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+    100%{transform:translateY(0);}
 
 }
 
 @keyframes borderMove{
 
-    0%{
-
+    from{
         background-position:0%;
+    }
+
+    to{
+        background-position:200%;
+    }
+
+}
+
+@keyframes dropdown{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px);
 
     }
 
-    100%{
+    to{
 
-        background-position:200%;
+        opacity:1;
+
+        transform:translateY(0);
 
     }
 

@@ -49,5 +49,16 @@ getAirQuality(lat: number, lon: number) {
   );
 
 }
+private geoUrl = 'https://api.openweathermap.org/geo/1.0';
+
+getCitySuggestions(city: string) {
+
+  return this.http.get<any>(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=8&language=en&format=json`
+  );
 
 }
+
+}
+
+

@@ -18,10 +18,37 @@
 
         <input
             type="text"
-            placeholder="Search city..."
+            placeholder="Search any city in the world..."
             [(ngModel)]="city"
+            (input)="onInput()"
+            (keydown)="onKeyDown($event)"
             (keyup.enter)="searchCity()"
+            autocomplete="off"
         >
+
+        <div
+            class="suggestions"
+            *ngIf="showSuggestions">
+
+            <div
+                class="suggestion"
+                *ngFor="let item of filteredCities; let i = index"
+                [class.active]="selectedIndex === i"
+                (click)="selectCity(item)">
+
+                <div class="city-name">
+                    <i class="fa-solid fa-location-dot"></i>
+                    {{ item.name }}
+                </div>
+
+                <div class="country">
+                    {{ item.admin1 ? item.admin1 + ', ' : '' }}
+                    {{ item.country }}
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -36,13 +63,15 @@
 
         </button>
 
-<button
-    class="glass-btn"
-    (click)="toggleTheme()">
+        <button
+            class="glass-btn"
+            title="Toggle Theme"
+            (click)="toggleTheme()">
 
-    <i class="fa-solid fa-circle-half-stroke"></i>
+            <i class="fa-solid fa-circle-half-stroke"></i>
 
-</button>
+        </button>
+
     </div>
 
 </nav>
